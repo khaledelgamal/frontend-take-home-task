@@ -6,36 +6,57 @@ import PlanSelection from "./components/PlanSelection/PlanSelection";
 import SensorSelection from "./components/SensorSelection/SensorSelection";
 import ExtraProtectionSelection from "./components/ExtraProtectionSelection/ExtraProtectionSelection";
 
-const steps = [
-  {
-    id: "step-1",
-    title: "Choose your cameras",
-    icon: "/icons/livestream.svg",
-    selectionText: "2 selected",
-    content: <CameraSelection />,
-  },
-  {
-    id: "step-2",
-    title: "Choose your plan",
-    icon: "/icons/plans.svg",
-    content: <PlanSelection />,
-  },
-  {
-    id: "step-3",
-    title: "Choose your sensors",
-    icon: "/icons/sensors.svg",
-    content: <SensorSelection />,
-  },
-  {
-    id: "step-4",
-    title: "Add extra protection",
-    icon: "/icons/extras.svg",
-    content: <ExtraProtectionSelection />,
-  },
-];
+import { useCartStore } from "../../store/useCartStore";
 
 const BundleBuilder = () => {
   const [activeStep, setActiveStep] = useState<string>("step-1");
+  const products = useCartStore((state) => state.products);
+  const plan = useCartStore((state) => state.plan);
+
+  const camerasSelected = new Set(
+    products.filter((p) => p.product.type === "camera").map((p) => p.product.id)
+  ).size;
+
+  const sensorsSelected = new Set(
+    products.filter((p) => p.product.type === "sensor").map((p) => p.product.id)
+  ).size;
+
+  const accessoriesSelected = new Set(
+    products
+      .filter((p) => p.product.type === "accessory")
+      .map((p) => p.product.id)
+  ).size;
+
+  const steps = [
+    {
+      id: "step-1",
+      title: "Choose your cameras",
+      icon: "/icons/livestream.svg",
+      selectionText: camerasSelected ? `${camerasSelected} selected` : "",
+      content: <CameraSelection />,
+    },
+    {
+      id: "step-2",
+      title: "Choose your plan",
+      icon: "/icons/plans.svg",
+      selectionText: plan ? "1 selected" : "",
+      content: <PlanSelection />,
+    },
+    {
+      id: "step-3",
+      title: "Choose your sensors",
+      icon: "/icons/sensors.svg",
+      selectionText: sensorsSelected ? `${sensorsSelected} selected` : "",
+      content: <SensorSelection />,
+    },
+    {
+      id: "step-4",
+      title: "Add extra protection",
+      icon: "/icons/extras.svg",
+      selectionText: accessoriesSelected ? `${accessoriesSelected} selected` : "",
+      content: <ExtraProtectionSelection />,
+    },
+  ];
 
   const handleNextStep = (nextStepId: string) => {
     setActiveStep(nextStepId);
