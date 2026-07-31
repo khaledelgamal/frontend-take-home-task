@@ -1,5 +1,5 @@
 import QuantityInput from "../../../../../QuantityInput/QuantityInput";
-import type { Product, Variant } from "../../product.types";
+import type { Product, Variant } from "../../../../../../types/product.types";
 // import { Link } from "react-router-dom";
 import { toast } from "sonner";
 

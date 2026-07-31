@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
-import type { Plan } from "../../plan.types";
+import type { Plan } from "../../../../../../types/plan.types";
 import { CheckIcon } from "./icons/CheckIcon";
 export const PlanCard = ({ plan }: { plan: Plan }) => {
   const [selectedVariantId, setSelectedVariantId] = useState(
@@ -63,11 +63,11 @@ export const PlanCard = ({ plan }: { plan: Plan }) => {
             <div className="flex items-center gap-1.5 mb-1">
               {activeVariant.sale_price && (
                 <span className="text-[13px] text-red-600 line-through">
-                  {activeVariant.sale_price}
+                  ${activeVariant.sale_price}
                 </span>
               )}
               <div className="text-xl font-bold text-gray-900 leading-none">
-                {activeVariant.price}
+                ${activeVariant.price}/mo
               </div>
             </div>
             <div className="text-[11px] text-gray-500 font-medium h-[16px]">

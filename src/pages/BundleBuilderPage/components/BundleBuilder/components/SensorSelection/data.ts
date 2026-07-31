@@ -1,4 +1,4 @@
-import type { Product } from "../ProductCard/product.types";
+import type { Product } from "../../../../types/product.types";
 
 export const SENSOR_PRODUCTS: Product[] = [
   {

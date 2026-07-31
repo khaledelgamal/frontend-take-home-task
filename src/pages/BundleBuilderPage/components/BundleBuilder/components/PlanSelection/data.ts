@@ -1,4 +1,4 @@
-import type { Plan } from "./plan.types";
+import type { Plan } from "../../../../types/plan.types";
 
 export const PLAN_PRODUCTS: Plan[] = [
   {
@@ -15,13 +15,13 @@ export const PLAN_PRODUCTS: Plan[] = [
       {
         variant_id: "cam-unlimited-monthly",
         billing_cycle: "Monthly",
-        price: "$12.99/mo",
+        price: "12.99",
       },
       {
         variant_id: "cam-unlimited-annual",
         billing_cycle: "Annual",
-        sale_price: "$12.99/mo",
-        price: "$9.99/mo",
+        sale_price: "12.99",
+        price: "9.99",
         description: "Billed $119.88 annually",
       },
     ],
@@ -39,13 +39,13 @@ export const PLAN_PRODUCTS: Plan[] = [
       {
         variant_id: "cam-protect-monthly",
         billing_cycle: "Monthly",
-        price: "$3.99/mo",
+        price: "3.99",
       },
       {
         variant_id: "cam-protect-annual",
         billing_cycle: "Annual",
-        sale_price: "$3.99/mo",
-        price: "$3.33/mo",
+        sale_price: "3.99",
+        price: "3.33",
         description: "Billed $39.96 annually",
       },
     ],

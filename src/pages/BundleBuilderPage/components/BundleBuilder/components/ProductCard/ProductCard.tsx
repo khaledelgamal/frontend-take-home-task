@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type Product } from "./product.types";
+import { type Product } from "../../../../types/product.types";
 import ProductCardImage from "./components/ProductCardImage/ProductCardImage";
 import ProductCardDetails from "./components/ProductCardDetails/ProductCardDetails";
 

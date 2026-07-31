@@ -1,4 +1,4 @@
-import type { Product } from "../../product.types";
+import type { Product } from "../../../../../../types/product.types";
 
 const ProductCardImage = ({ product }: { product: Product }) => {
   return (
