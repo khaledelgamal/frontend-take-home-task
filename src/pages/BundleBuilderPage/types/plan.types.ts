@@ -1,6 +1,6 @@
 export interface PlanVariant {
   variant_id: string;
-  billing_cycle: "Monthly" | "Annual";
+  billing_cycle: "Annual";
   price: string;
   sale_price?: string;
   description?: string;

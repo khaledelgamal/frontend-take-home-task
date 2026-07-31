@@ -1,14 +1,14 @@
-import { PROTECTION_PRODUCTS } from "./data";
+import { ACCESSORIES_PRODUCTS } from "./data";
 import ProductCard from "../ProductCard/ProductCard";
 
 const ExtraProtectionSelection = () => {
   return (
     <div className="w-full pt-1 pb-6 lg:pb-8">
       <div className="flex overflow-x-auto lg:grid lg:grid-cols-2 gap-4 pb-4 lg:pb-0 snap-x">
-        {PROTECTION_PRODUCTS.map((product, index) => {
+        {ACCESSORIES_PRODUCTS.map((product, index) => {
           const isLastAndOdd =
-            index === PROTECTION_PRODUCTS.length - 1 &&
-            PROTECTION_PRODUCTS.length % 2 !== 0;
+            index === ACCESSORIES_PRODUCTS.length - 1 &&
+            ACCESSORIES_PRODUCTS.length % 2 !== 0;
           return (
             <div
               key={product.id}

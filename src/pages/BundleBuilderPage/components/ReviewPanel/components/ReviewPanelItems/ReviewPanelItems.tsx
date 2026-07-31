@@ -1,12 +1,12 @@
+import type { ReviewItem } from "../../types/review.types";
 import ReviewPanelItem from "../ReviewPanelItem/ReviewPanelItem";
 
 export interface ReviewPanelItemsProps {
-  type: string;
   title: string;
-  items: any[];
+  items: ReviewItem[];
 }
 
-const ReviewPanelItems = ({ type, title, items }: ReviewPanelItemsProps) => {
+const ReviewPanelItems = ({ title, items }: ReviewPanelItemsProps) => {
   return (
     <div className="border-t pt-[15px] border-gray-400">
       {title && (

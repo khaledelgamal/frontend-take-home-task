@@ -2,6 +2,7 @@ import { useState } from "react";
 import { type Product } from "../../../../types/product.types";
 import ProductCardImage from "./components/ProductCardImage/ProductCardImage";
 import ProductCardDetails from "./components/ProductCardDetails/ProductCardDetails";
+import { useCartStore } from "../../../../store/useCartStore";
 
 interface ProductCardProps {
   product: Product;
@@ -14,15 +15,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const activeVariant =
     product.variants.find((v) => v.variant_id === selectedVariantId) ||
     product.variants[0];
+  const products = useCartStore((state) => state.products);
+  const cartProduct = products.find(
+    (p) =>
+      p.product.id === product.id && p.variantId === activeVariant.variant_id,
+  );
 
-  // Mock quantity for now based on the product id
-  const quantity =
-    product.id === "wyze-cam-v4" ? 1 : product.id === "wyze-cam-pan-v3" ? 2 : 0;
-  const isSelected = quantity > 0;
+  const quantity = cartProduct?.quantity || 0;
+  const isHighlighted = quantity > 0;
 
   return (
     <div
-      className={`relative p-2.75 bg-white rounded-10 flex gap-4.75 flex-col lg:flex-row border transition-colors flex-shrink-0 w-[225px] lg:w-full h-full ${isSelected ? "border-purple" : "border-transparent"}`}
+      className={`relative p-2.75 bg-white rounded-10 flex gap-4.75 flex-col lg:flex-row border transition-colors flex-shrink-0 w-[225px] lg:w-full h-full ${isHighlighted ? "border-purple" : "border-transparent"}`}
     >
       {/* Discount Badge */}
       {activeVariant.discount_percentage && (

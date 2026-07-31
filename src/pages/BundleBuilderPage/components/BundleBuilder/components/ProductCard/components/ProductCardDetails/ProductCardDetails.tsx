@@ -1,7 +1,7 @@
 import QuantityInput from "../../../../../QuantityInput/QuantityInput";
 import type { Product, Variant } from "../../../../../../types/product.types";
-// import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useCartStore } from "../../../../../../store/useCartStore";
 
 interface ProductCardDetailsProps {
   product: Product;
@@ -16,6 +16,15 @@ const ProductCardDetails = ({
   onSelectVariant,
   quantity,
 }: ProductCardDetailsProps) => {
+  const changeProductQuantity = useCartStore(
+    (state) => state.changeProductQuantity,
+  );
+
+  const handleQuantityChange = (newQuantity: number) => {
+    console.log(newQuantity);
+
+    changeProductQuantity(product, activeVariant.variant_id, newQuantity);
+  };
   return (
     <div className="flex-1 flex flex-col justify-between lg:justify-center">
       <div className="tracking-[0.6px]">
@@ -66,6 +75,7 @@ const ProductCardDetails = ({
       <div className="flex items-end justify-between mt-2.5">
         <QuantityInput
           value={quantity}
+          onChange={handleQuantityChange}
           enabledClassName="bg-gray-200 text-slate-600 hover:bg-gray-350 cursor-pointer transition-colors"
         />
         <div
@@ -77,7 +87,9 @@ const ProductCardDetails = ({
             </span>
           )}
           <span className="text-gray-700 ">
-            {activeVariant.price === "0" ? "Free" : `$${activeVariant.price}`}
+            {parseInt(activeVariant.price) === 0
+              ? "Free"
+              : `$${activeVariant.price}`}
           </span>
         </div>
       </div>

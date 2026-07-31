@@ -16,7 +16,7 @@ const PriceDisplay = ({ price, oldPrice }: PriceDisplayProps) => {
         </span>
       )}
       <span className="text-sm font-semibold text-purple tracking-[0.5%] leading-none">
-        {price === "0" ? "FREE" : `$${price}`}
+        {parseFloat(price) === 0 ? "FREE" : `$${price}`}
       </span>
     </div>
   );

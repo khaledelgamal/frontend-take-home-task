@@ -1,10 +1,20 @@
 import { toast } from "sonner";
+import { useCartStore } from "../../../../store/useCartStore";
 
 const ReviewPanelTotal = () => {
+  const totals = useCartStore((state) => state.totals);
+  const monthlyTotal = useCartStore((state) => state.monthlyTotal);
+  const monthlySavings = useCartStore((state) => state.monthlySavings);
+  const saveCart = useCartStore((state) => state.saveCart);
+  const totalSavings = totals.totalSavings + monthlySavings;
+
   const handleCheckout = () => {
     toast.success("Checkout initiated successfully!");
   };
-
+  const handleSaveCart = () => {
+    saveCart();
+    toast.success("Your bundle has been saved successfully!");
+  };
   return (
     <div className="mt-6 border-t border-gray-400 pt-6 md:mt-0 md:border-t-0 md:pt-0 lg:mt-6 lg:border-t lg:border-gray-400 lg:pt-6">
       {/* Badge and Text Section (Tablet & Large Mobile) */}
@@ -40,23 +50,30 @@ const ReviewPanelTotal = () => {
 
         {/* Pricing Info */}
         <div className="flex flex-col items-end min-[500px]:flex-row min-[500px]:items-center min-[500px]:justify-between min-[500px]:w-full lg:flex-col lg:items-end lg:w-auto">
-          <div className="bg-purple text-white text-xs font-medium tracking-[-5%] px-2.5 py-1 rounded-[4px] mb-2 min-[500px]:mb-0 lg:mb-2">
-            as low as $19.19/mo
-          </div>
+          {monthlyTotal > 0 && (
+            <div className="bg-purple text-white text-xs font-medium tracking-[-5%] px-2.5 py-1 rounded-[4px] mb-2 min-[500px]:mb-0 lg:mb-2">
+              as low as ${monthlyTotal.toFixed(2)}/mo
+            </div>
+          )}
           <div className="flex items-baseline gap-2">
-            <span className="text-gray-600 line-through text-lg font-medium tracking-[0.25%] leading-5">
-              $238.81
-            </span>
+            {totals.totalPriceWithoutDiscounts > totals.totalPrice && (
+              <span className="text-gray-600 line-through text-lg font-medium tracking-[0.25%] leading-5">
+                ${totals.totalPriceWithoutDiscounts.toFixed(2)}
+              </span>
+            )}
             <span className="text-purple text-2xl font-bold tracking-[-0.13%] leading-8 ">
-              $187.89
+              ${totals.totalPrice.toFixed(2)}
             </span>
           </div>
         </div>
       </div>
 
-      <p className="text-teal font-semibold text-xs text-center mb-4">
-        Congrats! You're saving $50.92 on your security bundle!
-      </p>
+      {totalSavings > 0 && (
+        <p className="text-teal font-semibold text-xs text-center mb-4">
+          Congrats! You're saving ${totalSavings.toFixed(2)} on your security
+          bundle!
+        </p>
+      )}
 
       <button
         onClick={handleCheckout}
@@ -66,7 +83,10 @@ const ReviewPanelTotal = () => {
       </button>
 
       <div className="text-center">
-        <button className="text-neutral-700 italic underline text-sm hover:text-gray-900 transition-colors cursor-pointer tracking-[0.5%] leading-[120%]">
+        <button
+          onClick={handleSaveCart}
+          className="text-neutral-700 italic underline text-sm hover:text-gray-900 transition-colors cursor-pointer tracking-[0.5%] leading-[120%]"
+        >
           Save my system for later
         </button>
       </div>

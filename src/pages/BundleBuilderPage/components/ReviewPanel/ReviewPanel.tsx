@@ -1,62 +1,12 @@
 import ReviewPanelItems from "./components/ReviewPanelItems/ReviewPanelItems";
+import ReviewPanelPlan from "./components/ReviewPanelPlan/ReviewPanelPlan";
 import ReviewPanelTotal from "./components/ReviewPanelTotal/ReviewPanelTotal";
 
-const mockCameras = [
-  {
-    title: "Wyze Cam v4",
-    price: "27.98",
-    oldPrice: "35.98",
-    quantity: 1,
-    image_url: "https://placehold.co/100x100?text=Cam",
-  },
-  {
-    title: "Wyze Cam Pan v3",
-    price: "47.98",
-    oldPrice: "57.98",
-    quantity: 2,
-    image_url: "https://placehold.co/100x100?text=Pan",
-  },
-];
+import { useCartStore } from "../../store/useCartStore";
+import type { CartProduct } from "../../store/cartStore.types";
+import type { ReviewItem } from "./types/review.types";
 
-const mockSensors = [
-  {
-    title: "Wyze Sense Motion Sensor",
-    price: "59.98",
-    quantity: 2,
-    image_url: "https://placehold.co/100x100?text=Sensor",
-  },
-  {
-    title: "Wyze Sense Hub (Required)",
-    price: "0",
-    oldPrice: "29.92",
-    quantity: 1,
-    image_url: "https://placehold.co/100x100?text=  ",
-  },
-];
-
-const mockAccessories = [
-  {
-    title: "Wyze MicroSD Card (256GB)",
-    price: "41.96",
-    quantity: 2,
-    image_url: "https://placehold.co/100x100?text=SD",
-  },
-];
-
-const mockPlan = [
-  {
-    title: (
-      <span className="font-bold flex items-center gap-1 tracking-[-0.2%]">
-        Cam <span className="text-purple">Unlimited</span>
-      </span>
-    ),
-    price: "9.99/mo",
-    oldPrice: "12.99/mo",
-    image_url: "https://placehold.co/100x100?text=Plan",
-  },
-];
-
-const mockShipping = [
+const mockShipping: ReviewItem[] = [
   {
     title: "Fast Shipping",
     price: "0",
@@ -66,6 +16,43 @@ const mockShipping = [
 ];
 
 const ReviewPanel = () => {
+  const products = useCartStore((state) => state.products);
+  const plan = useCartStore((state) => state.plan);
+  const changeProductQuantity = useCartStore(
+    (state) => state.changeProductQuantity,
+  );
+
+  const mapProductToReviewItem = (cartProduct: CartProduct): ReviewItem => {
+    const variant = cartProduct.product.variants.find(
+      (v) => v.variant_id === cartProduct.variantId,
+    );
+    return {
+      title: cartProduct.product.title,
+      image_url: variant.img_url,
+      quantity: cartProduct.quantity,
+      price: variant?.price || "0",
+      oldPrice: variant?.sale_price || undefined,
+      onQuantityChange: (newValue: number) => {
+        changeProductQuantity(
+          cartProduct.product,
+          cartProduct.variantId,
+          newValue,
+        );
+      },
+      is_required: cartProduct.product.is_required,
+    };
+  };
+
+  const camerasProducts = products
+    .filter((p) => p.product.type === "camera")
+    .map(mapProductToReviewItem);
+  const sensorProducts = products
+    .filter((p) => p.product.type === "sensor")
+    .map(mapProductToReviewItem);
+  const accessoryProducts = products
+    .filter((p) => p.product.type === "accessory")
+    .map(mapProductToReviewItem);
+
   return (
     <section className="md:rounded-10 bg-blue-50 p-[15px]">
       <p className="font-medium text-xs text-neutral-700 uppercase tracking-[1.6px]">
@@ -83,23 +70,17 @@ const ReviewPanel = () => {
                 matters most safe.
               </p>
             </header>
-            <ReviewPanelItems
-              type="cameras"
-              title="Cameras"
-              items={mockCameras}
-            />
-            <ReviewPanelItems
-              type="sensors"
-              title="Sensors"
-              items={mockSensors}
-            />
-            <ReviewPanelItems
-              type="accessories"
-              title="Accessories"
-              items={mockAccessories}
-            />
-            <ReviewPanelItems type="plan" title="Plan" items={mockPlan} />
-            <ReviewPanelItems type="shipping" title="" items={mockShipping} />
+            {camerasProducts.length > 0 && (
+              <ReviewPanelItems title="Cameras" items={camerasProducts} />
+            )}
+            {sensorProducts.length > 0 && (
+              <ReviewPanelItems title="Sensors" items={sensorProducts} />
+            )}
+            {accessoryProducts.length > 0 && (
+              <ReviewPanelItems title="Accessories" items={accessoryProducts} />
+            )}
+            {plan && <ReviewPanelPlan />}
+            <ReviewPanelItems title="" items={mockShipping} />
           </div>
 
           <div className="md:w-[400px] lg:w-auto">

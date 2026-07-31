@@ -1,6 +1,6 @@
 import type { Product } from "../../../../types/product.types";
 
-export const PROTECTION_PRODUCTS: Product[] = [
+export const ACCESSORIES_PRODUCTS: Product[] = [
   {
     id: "wyze-microsd-card-256",
     title: "Wyze MicroSD Card (256GB)",

@@ -6,6 +6,7 @@ export interface CartProduct {
   variantId: string;
   quantity: number;
 }
+export type CartPlan = { plan: Plan; variantId: string };
 
 export interface CartTotals {
   totalPrice: number;
@@ -18,13 +19,17 @@ export interface PlanTotals {
 }
 export interface CartStore {
   products: CartProduct[];
-  plan: { plan: Plan; variantId: string } | null;
+  plan: CartPlan | null;
   totals: CartTotals;
   monthlyTotal: number;
   monthlySavings: number;
 
-  increaseProduct: (product: Product, variantId: string) => void;
-  decreaseProduct: (product: Product, variantId: string) => void;
+  changeProductQuantity: (
+    product: Product,
+    variantId: string,
+    quantity: number,
+  ) => void;
   setPlan: (plan: Plan, variantId: string) => void;
   clearPlan: () => void;
+  saveCart: () => void;
 }
