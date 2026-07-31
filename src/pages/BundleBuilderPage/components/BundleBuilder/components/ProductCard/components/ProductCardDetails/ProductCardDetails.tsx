@@ -21,10 +21,9 @@ const ProductCardDetails = ({
   );
 
   const handleQuantityChange = (newQuantity: number) => {
-    console.log(newQuantity);
-
     changeProductQuantity(product, activeVariant.variant_id, newQuantity);
   };
+
   return (
     <div className="flex-1 flex flex-col justify-between lg:justify-center">
       <div className="tracking-[0.6px]">
@@ -76,6 +75,7 @@ const ProductCardDetails = ({
         <QuantityInput
           value={quantity}
           onChange={handleQuantityChange}
+          disabled={product.is_required && parseInt(activeVariant.price) === 0}
           enabledClassName="bg-gray-200 text-slate-600 hover:bg-gray-350 cursor-pointer transition-colors"
         />
         <div

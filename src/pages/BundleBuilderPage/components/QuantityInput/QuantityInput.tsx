@@ -3,6 +3,7 @@ export interface QuantityInputProps {
   max?: number;
   onChange?: (value: number) => void;
   value?: number;
+  disabled?: boolean;
   enabledClassName?: string;
   disabledClassName?: string;
 }
@@ -12,11 +13,12 @@ const QuantityInput = ({
   max = 99,
   onChange,
   value = 1,
+  disabled = false,
   enabledClassName = "bg-white text-gray-700 cursor-pointer hover:bg-gray-100 hover:text-gray-900 active:bg-gray-200",
   disabledClassName = "border border-gray-300 text-gray-400 bg-white cursor-not-allowed",
 }: QuantityInputProps) => {
-  const isDecreaseDisabled = value <= min;
-  const isIncreaseDisabled = value >= max;
+  const isDecreaseDisabled = disabled || value <= min;
+  const isIncreaseDisabled = disabled || value >= max;
 
   return (
     <div className="flex items-center gap-3 py-1">

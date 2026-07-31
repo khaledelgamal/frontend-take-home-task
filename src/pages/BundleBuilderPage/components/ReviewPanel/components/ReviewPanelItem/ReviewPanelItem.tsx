@@ -46,6 +46,7 @@ const ReviewPanelItem = ({ item }: ReviewPanelItemProps) => {
           <QuantityInput
             value={item.quantity}
             onChange={item.onQuantityChange}
+            disabled={item.is_required && parsePrice(item.price) === 0}
           />
         )}
       </div>
