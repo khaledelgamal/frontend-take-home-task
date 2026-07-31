@@ -2,6 +2,26 @@ import type { Product } from "../ProductCard/product.types";
 
 export const SENSOR_PRODUCTS: Product[] = [
   {
+    id: "wyze-sense-hub",
+    title: "Wyze Sense Hub",
+    description:
+      "Connects your Wyze sensors to your home network and features a built-in siren.",
+    type: "sensor",
+    is_required: true,
+    img_url: "/images/wyze-sense-hub.png",
+    variants: [
+      {
+        variant_id: "sense-hub-white",
+        color: "White",
+        price: "0",
+        sale_price: "29.92",
+        discount_percentage: "100",
+        stock_quantity: 50,
+        img_url: "/images/wyze-sense-hub.png",
+      },
+    ],
+  },
+  {
     id: "wyze-motion-sensor",
     title: "Wyze Sense Motion Sensor",
     description: "Know when doors and windows are opened or closed.",
@@ -11,8 +31,9 @@ export const SENSOR_PRODUCTS: Product[] = [
       {
         variant_id: "motion-v1-white",
         color: "White",
-        sale_price: "$12.99",
-        price: "$9.99",
+        price: "9.99",
+        sale_price: "12.99",
+        discount_percentage: "23",
         stock_quantity: 50,
         img_url: "/images/wyze-motion-sensor.png",
       },
@@ -28,7 +49,7 @@ export const SENSOR_PRODUCTS: Product[] = [
       {
         variant_id: "motion-v2-white",
         color: "White",
-        price: "$14.99",
+        price: "14.99",
         stock_quantity: 50,
         img_url: "/images/wyze-motion-sensor-v2.png",
       },
@@ -44,7 +65,7 @@ export const SENSOR_PRODUCTS: Product[] = [
       {
         variant_id: "leak-white",
         color: "White",
-        price: "$19.99",
+        price: "19.99",
         stock_quantity: 50,
         img_url: "/images/wyze-leak-sensor.png",
       },

@@ -12,6 +12,7 @@ export interface Product {
   id: string;
   title: string;
   description: string;
+  is_required?: boolean;
   type: string;
   img_url: string;
   variants: Variant[];

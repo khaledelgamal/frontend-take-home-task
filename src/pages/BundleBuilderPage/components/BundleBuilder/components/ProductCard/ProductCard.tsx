@@ -27,7 +27,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       {/* Discount Badge */}
       {activeVariant.discount_percentage && (
         <div className="absolute top-2.75 left-2.75 bg-purple text-white text-[11px] flex items-center justify-center font-bold px-2 py-0.5 rounded-full z-10">
-          {activeVariant.discount_percentage}
+          Save {activeVariant.discount_percentage}%
         </div>
       )}
 

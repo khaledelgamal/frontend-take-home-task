@@ -19,7 +19,9 @@ const ProductCardDetails = ({
   return (
     <div className="flex-1 flex flex-col justify-between lg:justify-center">
       <div className="tracking-[0.6px]">
-        <h4 className="font-semibold text-neutral-900">{product.title}</h4>
+        <h4 className="font-semibold text-neutral-900">
+          {product.title} {product.is_required ? "(Required)" : ""}
+        </h4>
         <div className="text-xs text-neutral-900/75 font-medium mt-2 leading-[130%]">
           {product.description}{" "}
           {/* <Link to={`/products/${product.id}`} className="text-purple text-[13px] underline hover:no-underline font-medium">Learn More</Link> */}
@@ -74,7 +76,9 @@ const ProductCardDetails = ({
               ${activeVariant.sale_price}
             </span>
           )}
-          <span className="text-gray-700 ">${activeVariant.price}</span>
+          <span className="text-gray-700 ">
+            {activeVariant.price === "0" ? "Free" : `$${activeVariant.price}`}
+          </span>
         </div>
       </div>
     </div>

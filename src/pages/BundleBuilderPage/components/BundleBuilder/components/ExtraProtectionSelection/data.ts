@@ -11,7 +11,7 @@ export const PROTECTION_PRODUCTS: Product[] = [
       {
         variant_id: "microsd-256-default",
         color: "Black",
-        price: "$29.99",
+        price: "29.99",
         stock_quantity: 100,
         img_url: "/images/wyze-microsd-card-256.png",
       },
@@ -27,7 +27,7 @@ export const PROTECTION_PRODUCTS: Product[] = [
       {
         variant_id: "microsd-128-default",
         color: "Black",
-        price: "$19.99",
+        price: "19.99",
         stock_quantity: 100,
         img_url: "/images/wyze-microsd-card-128.png",
       },
