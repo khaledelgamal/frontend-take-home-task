@@ -12,11 +12,11 @@ const PriceDisplay = ({ price, oldPrice }: PriceDisplayProps) => {
     >
       {oldPrice && (
         <span className="text-sm text-gray-600 font-medium line-through tracking-[0.5%] leading-none">
-          {oldPrice}
+          ${oldPrice}
         </span>
       )}
       <span className="text-sm font-semibold text-purple tracking-[0.5%] leading-none">
-        {price}
+        {price === "0" ? "FREE" : `$${price}`}
       </span>
     </div>
   );
