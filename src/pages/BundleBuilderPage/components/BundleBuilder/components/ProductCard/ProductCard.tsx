@@ -35,7 +35,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       )}
 
-      <ProductCardImage product={product} />
+      <ProductCardImage product={product} imageUrl={activeVariant?.img_url} />
       <ProductCardDetails
         product={product}
         activeVariant={activeVariant}
