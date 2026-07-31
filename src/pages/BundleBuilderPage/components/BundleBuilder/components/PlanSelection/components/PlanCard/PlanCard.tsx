@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import type { Plan } from "../../plan.types";
-import { CheckIcon } from "./CheckIcon";
+import { CheckIcon } from "./icons/CheckIcon";
 export const PlanCard = ({ plan }: { plan: Plan }) => {
   const [selectedVariantId, setSelectedVariantId] = useState(
     plan.variants[0].variant_id,
