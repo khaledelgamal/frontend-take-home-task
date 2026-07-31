@@ -3,8 +3,9 @@ import PriceDisplay from "../ReviewPanelItem/components/PriceDisplay/PriceDispla
 import DOMPurify from "dompurify";
 
 const ReviewPanelPlan = () => {
-  const { plan, variantId } = useCartStore((state) => state.plan);
-
+  const planState = useCartStore((state) => state.plan);
+  if (!planState) return null;
+  const { plan, variantId } = planState;
   const variant =
     plan.variants.find((v) => v.variant_id === variantId) || plan.variants[0];
 

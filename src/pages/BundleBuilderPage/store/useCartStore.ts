@@ -48,7 +48,7 @@ const defaultInitialData = {
   },
   monthlyTotal: parseFloat(PLAN_PRODUCTS[1].variants[0].price),
   monthlySavings:
-    parseFloat(PLAN_PRODUCTS[1].variants[0].sale_price) -
+    parseFloat(PLAN_PRODUCTS[1].variants[0].sale_price ?? "0") -
     parseFloat(PLAN_PRODUCTS[1].variants[0].price),
 };
 

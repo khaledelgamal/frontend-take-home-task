@@ -28,7 +28,7 @@ const ReviewPanel = () => {
     );
     return {
       title: cartProduct.product.title,
-      image_url: variant.img_url,
+      image_url: variant?.img_url ?? "",
       quantity: cartProduct.quantity,
       price: variant?.price || "0",
       oldPrice: variant?.sale_price || undefined,
