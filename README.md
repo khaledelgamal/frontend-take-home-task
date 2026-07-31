@@ -1,5 +1,7 @@
 # Frontend Take-Home Task - Bundle Builder
 
+## Live Demo https://frontend-take-home-task-khaledelgamal.vercel.app
+
 ## Task Description
 This project is a React-based frontend application that implements a custom "Bundle Builder" interface. It allows users to construct a product bundle by selecting a base plan, adding required and optional accessories, choosing variants (like colors), and adjusting quantities. The interface dynamically updates the cart, computes total savings and prices, and includes features like local storage persistence for a seamless shopping experience.
 
